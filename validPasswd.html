@@ -1,0 +1,114 @@
+
+<html lang="fr">
+
+  <head>
+    <title>Mot de passe fort</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+  </head>
+
+  <body>
+    <div class="container"><br>
+      <h2>Validation mot de passe</h2><hr>
+      <form>
+        <div class="form-group">
+          <label for="pwd">Mot de passe:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter your password" name="pwd" required  autocomplete="off">
+          <span id="span1"></span>
+        </div>
+
+        <div class="form-group" id="div1">
+          <label for="pwd">Confirmation du mot de passe:</label>
+          <input type="password" class="form-control" id="confirm_pwd" placeholder="Enter password" name="pwd" required autocomplete="off"> 
+          <span id="span2"></span>  
+        </div>
+
+        <button id="btnsubmit" type="submit" class="btn btn-block">Se connecter</button><br>
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    $(function(){
+
+      //declaration des variables
+      let pwd = $('#pwd')
+      let confirmpwd = $('#confirm_pwd')
+      let submit = $('#btnsubmit')
+      
+      pwd.keyup(function(){
+
+       if (pwd.val().match( /[0-9]/g) && 
+        pwd.val().match( /[A-Z]/g) && 
+        pwd.val().match(/[a-z]/g) && 
+        pwd.val().match( /[^a-zA-Z\d]/g) &&
+        pwd.val().length <= 8){
+
+          $("#span1").html("Mot de passe fort");
+          $("#span1").css('color','green') 
+        } 
+        
+        else if(pwd.val().length < 4){
+          $("#span1").html("Mot de passe faible")
+          $("#span1").css('color','red') 
+        }
+
+        else if(pwd.val().length > 8){
+          $("#span1").html("Mot de passe trop grand");
+          $("#span1").css('color','red') 
+        }  
+      })
+
+      confirmpwd.keyup(function(){
+        if(confirmpwd.val() == pwd.val() && confirmpwd.val() != '' ){
+          $("#span2").html("Les deux mot de passe sont identiques");
+          $("#span2").css('color','green') 
+        }
+        else{
+          $("#span2").html("Les deux mot de passe ne sont pas identiques");
+          $("#span2").css('color','red') 
+        }
+      })     
+    })
+    
+    </script>
+
+  </body>
+</html>
+
+<!-- #STYLE CSS -->
+<style>
+body{
+  background-color: rgb(27, 26, 26);
+}
+.container{
+  background: honeydew;
+  border-radius: 25px 25px 25px 25px;
+  margin-top: 50px;
+  width: 400px;
+  padding: auto;
+}
+h2{
+  text-align: center;
+    
+}
+hr{
+  opacity: 1px;
+  color: forestgreen;
+}
+.btn-block{
+  background-color: #000;   
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+#pwd {
+  border-radius: 5px 5px 5px 5px;
+}
+.form-controll{
+  width: 100%;
+  border: none;    
+}
+
+</style>
+   
